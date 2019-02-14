@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <template id="boxtemplate">
+      <div id="box"></div>
+    </template>
+
+    <script>
+      function createBox() {
+        const clone = document
+          .querySelector("#boxtemplate")
+          .content.cloneNode(true);
+
+        clone.style.height = getRandomNumber();
+
+        const box = clone.querySelector("#box");
+
+        box.style.height = height;
+
+        const elm = document.querySelector("#container").appendChild(clone);
+
+        document.querySelector("#container").appendChild(clone);
+      }
+
+      function getRandomNumber() {
+        const num = Math.random() * 100;
+
+        if (num < 35) {
+        }
+        return num;
+      }
+      let counter = 0;
+
+      function createBoxes() {
+        createBox();
+
+        counter++;
+
+        if (counter < 10) {
+          createBoxes();
+        }
+      }
+
+      function scrollBoxes() {
+        createBox();
+
+        //remove the first one
+        document.querySelector("#box").remove();
+      }
+
+      // first solution : just forEach through array, clone a bar and set the height
+
+      // challange : forEach through array, set the height on existing boxes
+    </script>
+  </body>
+</html>
