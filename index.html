@@ -4,8 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <style></style>
+    <title>Bar chart</title>
+    <style>
+      #container {
+        margin: 20px;
+        width: 800px;
+        height: 200px;
+        border: solid 2px black;
+      }
+
+      #box {
+        width: 20px;
+        background-color: blue;
+        border: solid 1px black;
+      }
+    </style>
   </head>
   <body>
     <div id="container"></div>
@@ -14,7 +27,9 @@
       <div id="box"></div>
     </template>
 
-    <script>
+    <script src="main.js"></script>
+
+    <!-- <script>
       function createBox() {
         const clone = document
           .querySelector("#boxtemplate")
@@ -60,6 +75,6 @@
       // first solution : just forEach through array, clone a bar and set the height
 
       // challange : forEach through array, set the height on existing boxes
-    </script>
+    </script> -->
   </body>
 </html>

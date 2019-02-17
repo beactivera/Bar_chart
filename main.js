@@ -1,23 +1,42 @@
 "use strict";
-
-// set empty array and counter
-const arr = [];
+// properties of container
+let boxContainer = document.querySelector("#container");
+const WIDTH_OF_CONTAINER = boxContainer.scrollWidth;
+const HEIGHT_OF_CONTAINER = boxContainer.scrollHeight;
+// template
+const templateHTML = document.querySelector("#boxtemplate").content;
+let clone = templateHTML.cloneNode(true);
+let box = clone.querySelector("#box");
+// calculations
 let counter = 0;
+const MAX_LENGTH_OF_ARRAY = 40;
+// arrays
+const arr = [];
+const arrBox = [];
 
+// start program
 window.addEventListener("DOMContentLoaded", init);
 
-// init
-// - increase counter
-// - specify length of the array
-// - loop - add each time one zero to the array
+// built array of divs
 function init() {
   counter++;
-
-  const maxLengthOfArray = 40;
-
-  if (counter <= maxLengthOfArray) {
-    arr.unshift(0);
+  if (counter <= MAX_LENGTH_OF_ARRAY) {
+    let newDiv = document.createElement("div");
+    newDiv.className = `${counter}-box`;
+    box.appendChild(newDiv);
     init();
+  } else {
+    console.log(box);
+    bulitNumArray();
+  }
+}
+
+// bulitNumArray - 40 zeros
+function bulitNumArray() {
+  counter++;
+  if (counter <= MAX_LENGTH_OF_ARRAY) {
+    arr.unshift(0);
+    bulitNumArray();
   } else {
     console.log(arr);
     addRandomNumToArray();
@@ -27,9 +46,8 @@ function init() {
 // makeRandomNumber
 // - generate number between 0 and 35
 function makeRandomNumber(min, max) {
-  const numb = Math.floor(Math.random() * (max - min) + min);
-
-  return numb;
+  const num = Math.floor(Math.random() * (max - min) + min);
+  return num;
 }
 
 // addRandomNumToArray
@@ -51,10 +69,10 @@ function addRandomNumToArray() {
 
   if (counter > LengthOfArray) {
     arr.pop();
-    createBox(randomNumber);
+    boxContainer.appendChild(clone);
   }
   console.log(arr);
-
+  createBoxes(randomNumber);
   setTimeout(addRandomNumToArray, 3000);
 }
 
@@ -62,23 +80,10 @@ function addRandomNumToArray() {
 // - create height based on random number
 // - grab html template
 // - add height to box from template
-
-function createBox(randomNumber) {
+function createBoxes(randomNumber) {
   let height = randomNumber;
-
-  console.log(height);
-  //grap html template
-  const clone = document.querySelector("#boxtemplate").content.cloneNode(true);
-  //add height to box from template
-  const box = (clone.querySelector(".box").style.height = height * 20 + "px");
-
-  console.log(box);
-
-  // what we are cloning and what we are appending?
-  // const clone stores content from html-template
-  // const box - store box in html-template, the program changes height
-  // show in the html
-  document.querySelector("#container").appendChild(clone);
+  box.style.top = HEIGHT_OF_CONTAINER - height + "px";
+  box.style.height = height + "px";
+  // box.style.width = WIDTH_OF_CONTAINER / 40 + "px";
 }
-
-// next task -- add style for HTML #container and #box in template
+//next task -- add style for HTML #container and #box in template
